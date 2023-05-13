@@ -135,7 +135,8 @@ module "bastion" {
 #   location            = var.location
 # }
 
-module "frontend" {
+# module "frontend" {
+module "frontend-kk" {
   source = "./modules/storage_account"
 
   application         = var.application
