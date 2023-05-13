@@ -53,16 +53,16 @@ jobs:
       - name: Deploy message
         run: echo "Deploying..."
 
-      # - name: Get build artifact
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: frontend
+      - name: Get build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend
 
-      # - name: Output artifact
-      #   run: ls -la
+      - name: Output artifact
+        run: ls -la
 
-      # - name: Upload files to Storage Account
-      #   uses: azure/CLI@v1
-      #   with:
-      #     inlineScript: |
-      #       az storage blob upload-batch --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} --account-key ${{ secrets.AZURE_STORAGE_KEY }} --destination \$web --source .
+      - name: Upload files to Storage Account
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az storage blob upload-batch --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} --account-key ${{ secrets.AZURE_STORAGE_KEY }} --destination \$web --source .
