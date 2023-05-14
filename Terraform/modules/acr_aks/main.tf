@@ -4,10 +4,9 @@ resource "azurerm_container_registry" "acr" {
   resource_group_name = var.resource_group_name
   location            = var.location
   sku                 = "Premium"
-
+  
   #Container registry > Setting > Access keys > Admin user > Enabled
   admin_enabled = true
-}
 
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = "${var.prefix}-${var.application}-${var.environment}-aks"
