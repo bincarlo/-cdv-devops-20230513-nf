@@ -83,7 +83,7 @@ jobs:
       - name: Setup kubectl
         uses: azure/setup-kubectl@v3
 
-      - name: sadasdas
+      - name: Deploy to AKS
         uses: azure/k8s-deploy@v4
         with: 
           namespace: default
