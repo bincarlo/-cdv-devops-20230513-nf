@@ -59,3 +59,34 @@ jobs:
       - name: Push image
         run: |
           docker push ${{ secrets.ACR_REGISTRY }}.azurecr.io/fastapi-101:latest
+
+  Deploy:
+    runs-on: ubuntu-latest
+    env:
+      resource-group: ${{ vars.resource_group }}
+      cluster-name: ${{ vars.cluster_name }}
+    needs: Push
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Azure CLI Login
+        uses: azure/login@v1
+        with:
+          creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.ARM_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
+
+      - name: Set AKS Context
+        uses: azure/aks-set-context@v2
+        with:
+          resource-group: ${{ env.resource_group }}
+          cluster-name: ${{ env.cluster_name }}
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v3
+
+      - name: sadasdas
+        uses: azure/k8s-deploy@v4
+        with: 
+          namespace: default
+          mainfests: |
+            Kubernetes/fastapi-101-main/deployment.yaml
+          images: ${{ secrets.ACR_REGISTRY }}.azurecr.io/fastapi-101:latest
