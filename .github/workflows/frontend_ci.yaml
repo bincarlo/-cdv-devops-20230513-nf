@@ -8,7 +8,7 @@ on:
       - opened
       - synchronize
       - reopened
-  push:
+  # push:
 
 jobs:
   Test:

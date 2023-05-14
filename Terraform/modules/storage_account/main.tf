@@ -19,4 +19,4 @@ resource "azurerm_storage_account" "storge" {
   }
 }
 
-#rebuild-try
+#rebuild-try another
