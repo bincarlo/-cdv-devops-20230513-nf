@@ -63,8 +63,8 @@ jobs:
   Deploy:
     runs-on: ubuntu-latest
     env:
-      resource-group: ${{ vars.resource_group }}
-      cluster-name: ${{ vars.cluster_name }}
+      resource_group: ${{ vars.resource_group }}
+      cluster_name: ${{ vars.cluster_name }}
     needs: Push
     steps:
       - name: Checkout
