@@ -17,6 +17,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      # - name: Cache dependencies
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.npm
+      #     key: node-modules-${{ hashFiles('**/package-lock.json') }}
+
       - name: Install dependencies
         run: npm ci
         working-directory: ./Actions/react-app
@@ -36,7 +42,7 @@ jobs:
       #   uses: actions/cache@v3
       #   with:
       #     path: ~/.npm
-      #     key: node-modules-${{ hashFiles() }}
+      #     key: node-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies
         run: npm ci
@@ -81,5 +87,4 @@ jobs:
         run: |
           az storage blob upload-batch \
           --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} \
-          --destination \$web \
-          --source .
+          --destination \$web --source .
