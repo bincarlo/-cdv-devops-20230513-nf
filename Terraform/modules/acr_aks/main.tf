@@ -5,6 +5,7 @@ resource "azurerm_container_registry" "acr" {
   location            = var.location
   sku                 = "Premium"
 
+  #Container registry > Setting > Access keys > Admin user > Enabled
   admin_enabled = true
 }
 
