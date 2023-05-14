@@ -5,7 +5,7 @@ on:
       - closed
     paths:
       - "Kubernetes/fastapi-101-main/**"
-  push:
+#   push:
 
 jobs:
   Build:
