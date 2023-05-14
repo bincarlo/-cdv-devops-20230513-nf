@@ -148,14 +148,14 @@ module "frontend-kk" {
   location    = var.location
 }
 
-module "acr_and_aks" {
-  source = "./modules/acr_aks"
+# module "acr_and_aks" {
+#   source = "./modules/acr_aks"
 
-  resource_group_name = module.resource_group.resource_group_name
+#   resource_group_name = module.resource_group.resource_group_name
 
-  location    = var.location
-  prefix      = var.prefix
-  application = var.application
-  environment = var.environment
-  owner       = var.owner
-}
+#   location    = var.location
+#   prefix      = var.prefix
+#   application = var.application
+#   environment = var.environment
+#   owner       = var.owner
+# }
