@@ -18,3 +18,5 @@ resource "azurerm_storage_account" "storge" {
     owner       = var.owner
   }
 }
+
+#rebuild-try
