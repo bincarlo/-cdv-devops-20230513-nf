@@ -148,6 +148,7 @@ module "frontend-kk" {
   location    = var.location
 }
 
+#ACR&AKS
 module "acr_and_aks" {
   source = "./modules/acr_aks"
 
