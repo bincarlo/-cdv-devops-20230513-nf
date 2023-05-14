@@ -87,7 +87,7 @@ jobs:
         uses: azure/k8s-deploy@v4
         with: 
           namespace: default
-          mainfests: |
+          manifests: |
             Kubernetes/fastapi-101-main/deployment.yaml
           images:
             ${{ secrets.ACR_REGISTRY }}.azurecr.io/fastapi-101:latest
