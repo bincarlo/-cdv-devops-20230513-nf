@@ -89,4 +89,5 @@ jobs:
           namespace: default
           mainfests: |
             Kubernetes/fastapi-101-main/deployment.yaml
-          images: ${{ secrets.ACR_REGISTRY }}.azurecr.io/fastapi-101:latest
+          images:
+            ${{ secrets.ACR_REGISTRY }}.azurecr.io/fastapi-101:latest
