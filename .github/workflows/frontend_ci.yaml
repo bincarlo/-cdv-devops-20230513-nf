@@ -70,8 +70,8 @@ jobs:
         with:
           name: frontend
 
-      - name: Output artifact
-        run: ls -la
+      # - name: Output artifact
+      #   run: ls -la
       
       - name: Login to Azure CLI
         uses: azure/login@v1
