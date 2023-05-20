@@ -61,7 +61,7 @@ module "networking" {
 #   warning_ag                 = module.log_analytics.warning_ag
 # }
 
-# DEL - 2023.05.14
+# DEL - 2023.05.14 - ADD - 2023.05.20
 module "bastion" {
   source = "./modules/virtual_machine"
 
