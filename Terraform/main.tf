@@ -173,3 +173,17 @@ module "logic_app" {
   stage = "startup"
   # path  = "./modules/logic_app/logic_app_code/startup.json"
 }
+
+module "logic_app" {
+  source = "./modules/logic_app"
+
+  resource_group_name = module.resource_group.resource_group_name
+  environment         = var.environment
+  application         = var.application
+  owner               = var.owner
+  prefix              = var.prefix
+  location            = var.location
+
+  stage = "shutdown"
+  # path  = "./modules/logic_app/logic_app_code/shutdown.json"
+}
