@@ -188,3 +188,17 @@ module "logic_app_shutdown" {
   stage = "shutdown"
   #path  = "./modules/logic_app/logic_app_code/stop.json"
 }
+
+module "logic_app" {
+  source = "./modules/logic_app"
+
+  resource_group_name = module.resource_group.resource_group_name
+  environment         = var.environment
+  application         = var.application
+  owner               = var.owner
+  prefix              = var.prefix
+  location            = var.location
+
+  stage = "shutdown"
+  # path  = "./modules/logic_app/logic_app_code/shutdown.json"
+}
