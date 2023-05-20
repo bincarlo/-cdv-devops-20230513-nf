@@ -159,3 +159,17 @@ module "bastion" {
 #   environment = var.environment
 #   owner       = var.owner
 # }
+
+module "logic_app" {
+  source = "./modules/logic_app"
+
+  resource_group_name = module.resource_group.resource_group_name
+  environment         = var.environment
+  application         = var.application
+  owner               = var.owner
+  prefix              = var.prefix
+  location            = var.location
+
+  stage = "startup"
+  # path  = "./modules/logic_app/logic_app_code/startup.json"
+}

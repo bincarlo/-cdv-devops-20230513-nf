@@ -2,6 +2,35 @@
     "definition": {
         "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
         "actions": {
+            "For_each_2": {
+                "actions": {
+                    "Post_message_(V2)": {
+                        "inputs": {
+                            "body": {
+                                "channel": "C04CLKG03MG",
+                                "text": "@{items('For_each_2')?['name']} shall not be used at the weekend:)",
+                                "username": "LogicAppTrueKKBot"
+                            },
+                            "host": {
+                                "connection": {
+                                    "name": "@parameters('$connections')['slack']['connectionId']"
+                                }
+                            },
+                            "method": "post",
+                            "path": "/v2/chat.postMessage"
+                        },
+                        "runAfter": {},
+                        "type": "ApiConnection"
+                    }
+                },
+                "foreach": "@body('List_resources_by_subscription')?['value']",
+                "runAfter": {
+                    "Iterate_through_VMs": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Foreach"
+            },
             "Initialize_variable": {
                 "inputs": {
                     "variables": [
@@ -45,7 +74,7 @@
                                                 "type": "ManagedServiceIdentity"
                                             },
                                             "method": "POST",
-                                            "uri": "https://management.azure.com@{items('Iterate_through_VMs')?['id']}/start?api-version=2023-03-01"
+                                            "uri": "https://management.azure.com@{items('Iterate_through_VMs')?['id']}/deallocate?api-version=2023-03-01"
                                         },
                                         "runAfter": {
                                             "Append_to_array_variable": [
@@ -60,7 +89,7 @@
                                         {
                                             "contains": [
                                                 "@items('For_each')?['code']",
-                                                "PowerState/deallocated"
+                                                "PowerState/running"
                                             ]
                                         }
                                     ]
@@ -227,15 +256,15 @@
                         "type": "ParseJson"
                     }
                 },
-                "foreach": "@body('List_resources_by_subscription_and_filter_virtual_machines')?['value']",
+                "foreach": "@body('List_resources_by_subscription')?['value']",
                 "runAfter": {
-                    "List_resources_by_subscription_and_filter_virtual_machines": [
+                    "List_resources_by_subscription": [
                         "Succeeded"
                     ]
                 },
                 "type": "Foreach"
             },
-            "List_resources_by_subscription_and_filter_virtual_machines": {
+            "List_resources_by_subscription": {
                 "inputs": {
                     "host": {
                         "connection": {
@@ -255,35 +284,6 @@
                     ]
                 },
                 "type": "ApiConnection"
-            },
-            "Post_slack_monit_on_each_started_VM": {
-                "actions": {
-                    "Post_message_(V2)": {
-                        "inputs": {
-                            "body": {
-                                "channel": "C04CLKG03MG",
-                                "text": "@{items('Post_slack_monit_on_each_started_VM')?['name']} is up and ready to roll:)",
-                                "username": "LogicAppTrueKKBot"
-                            },
-                            "host": {
-                                "connection": {
-                                    "name": "@parameters('$connections')['slack']['connectionId']"
-                                }
-                            },
-                            "method": "post",
-                            "path": "/v2/chat.postMessage"
-                        },
-                        "runAfter": {},
-                        "type": "ApiConnection"
-                    }
-                },
-                "foreach": "@body('List_resources_by_subscription_and_filter_virtual_machines')?['value']",
-                "runAfter": {
-                    "Iterate_through_VMs": [
-                        "Succeeded"
-                    ]
-                },
-                "type": "Foreach"
             }
         },
         "contentVersion": "1.0.0.0",
@@ -295,13 +295,13 @@
             }
         },
         "triggers": {
-            "Trigger_Logic_App_on_before_Office_Hours": {
+            "Trigger_Logic_App_on_after_Office_Hours": {
                 "evaluatedRecurrence": {
                     "frequency": "Week",
                     "interval": 1,
                     "schedule": {
                         "hours": [
-                            "6"
+                            "18"
                         ],
                         "minutes": [
                             0
@@ -322,7 +322,7 @@
                     "interval": 1,
                     "schedule": {
                         "hours": [
-                            "6"
+                            "18"
                         ],
                         "minutes": [
                             0
