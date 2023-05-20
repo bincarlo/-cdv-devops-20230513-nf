@@ -9,7 +9,7 @@
                             "body": {
                                 "channel": "C04CLKG03MG",
                                 "text": "@{items('For_each_2')?['name']} shall not be used at the weekend:)",
-                                "username": "LogicAppBotKK"
+                                "username": "LogicAppTrueKKBot"
                             },
                             "host": {
                                 "connection": {

@@ -263,7 +263,7 @@
                             "body": {
                                 "channel": "C04CLKG03MG",
                                 "text": "@{items('Post_slack_monit_on_each_started_VM')?['name']} is up and ready to roll:)",
-                                "username": "LogicAppBotKK"
+                                "username": "LogicAppTrueKKBot"
                             },
                             "host": {
                                 "connection": {
