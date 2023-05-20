@@ -160,7 +160,7 @@ module "bastion" {
 #   owner       = var.owner
 # }
 
-module "logic_app" {
+module "logic_app_startup" {
   source = "./modules/logic_app"
 
   resource_group_name = module.resource_group.resource_group_name
@@ -171,5 +171,34 @@ module "logic_app" {
   location            = var.location
 
   stage = "startup"
-  # path  = "./modules/logic_app/logic_app_code/startup.json"
+  # path  = "./modules/logic_app/logic_app_code/start.json"
+}
+
+# new logic app
+module "logic_app_shutdown" {
+  source = "./modules/logic_app"
+
+  resource_group_name = module.resource_group.resource_group_name
+  environment         = var.environment
+  application         = var.application
+  owner               = var.owner
+  prefix              = var.prefix
+  location            = var.location
+
+  stage = "shutdown"
+  #path  = "./modules/logic_app/logic_app_code/stop.json"
+}
+
+module "logic_app" {
+  source = "./modules/logic_app"
+
+  resource_group_name = module.resource_group.resource_group_name
+  environment         = var.environment
+  application         = var.application
+  owner               = var.owner
+  prefix              = var.prefix
+  location            = var.location
+
+  stage = "shutdown"
+  # path  = "./modules/logic_app/logic_app_code/shutdown.json"
 }
